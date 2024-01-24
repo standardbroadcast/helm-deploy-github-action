@@ -254,10 +254,9 @@ async function run() {
     }
     core.debug("plugin list:");
 
-    core.debug(await exec.exec(helm, ["plugin", "list" ] ))
-
-    // helm plugin install https://github.com/hypnoglow/helm-s3.git
-    await exec.exec(helm, ["plugin", "install", "https://github.com/hypnoglow/helm-s3.git" ] , {
+    core.debug(await exec.exec(helm, ["plugin", "list" ] ).stdout.trim())
+    core.debug(process.env.AWS_ACCESS_KEY_ID);
+    await exec.exec(helm, ["repo", "add", "staging", "s3://nebula-helm-charts/charts/staging" ] , {
       env: {
         ...process.env,
         AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID ,
@@ -265,8 +264,7 @@ async function run() {
         AWS_DEFAULT_REGION: "us-east-1",
       },
     })
-    core.debug(process.env.AWS_ACCESS_KEY_ID);
-    await exec.exec(helm, ["repo", "add", "staging", "s3://nebula-helm-charts/charts/staging" ] , {
+      await exec.exec(helm, ["repo", "update"] , {
       env: {
         ...process.env,
         AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID ,
