@@ -254,7 +254,7 @@ async function run() {
     }
     core.debug("plugin list:");
 
-    core.debug(await exec.exec(helm, ["plugin", "list" ] ).stdout.trim())
+    core.debug(await exec.exec(helm, ["plugin", "list" ] ).stdout)
     core.debug(process.env.AWS_ACCESS_KEY_ID);
     await exec.exec(helm, ["repo", "add", "staging", "s3://nebula-helm-charts/charts/staging" ] , {
       env: {
