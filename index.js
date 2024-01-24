@@ -205,6 +205,13 @@ async function run() {
       process.env.XDG_DATA_HOME = "/root/.helm/"
       process.env.XDG_CACHE_HOME = "/root/.helm/"
       process.env.XDG_CONFIG_HOME = "/root/.helm/"
+      process.env.HELM_CACHE_HOME="/root/.cache/helm"
+      process.env.HELM_CONFIG_HOME="/root/.config/helm"
+      process.env.HELM_DATA_HOME="/root/.local/share/helm"
+      process.env.HELM_PLUGINS="/root/.local/share/helm/plugins"
+      process.env.HELM_REGISTRY_CONFIG="/root/.config/helm/registry.json"
+      process.env.HELM_REPOSITORY_CACHE="/root/.cache/helm/repository"
+      process.env.HELM_REPOSITORY_CONFIG="/root/.config/helm/repositories.yaml"
     } else {
       process.env.HELM_HOME = "/root/.helm/"
     }

@@ -4,13 +4,7 @@ ENV BASE_URL="https://get.helm.sh"
 
 ENV HELM_2_FILE="helm-v2.17.0-linux-amd64.tar.gz"
 ENV HELM_3_FILE="helm-v3.6.3-linux-amd64.tar.gz"
-ENV HELM_CACHE_HOME="/github/home/.cache/helm"
-ENV HELM_CONFIG_HOME="/github/home/.config/helm"
-ENV HELM_DATA_HOME="/github/home/.local/share/helm"
-ENV HELM_PLUGINS="/github/home/.local/share/helm/plugins"
-ENV HELM_REGISTRY_CONFIG="/github/home/.config/helm/registry.json"
-ENV HELM_REPOSITORY_CACHE="/github/home/.cache/helm/repository"
-ENV HELM_REPOSITORY_CONFIG="/github/home/.config/helm/repositories.yaml"
+
 
 RUN apk add --no-cache ca-certificates \
     --repository http://dl-3.alpinelinux.org/alpine/edge/community/ \
