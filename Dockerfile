@@ -22,7 +22,7 @@ RUN \
     chmod +x /usr/bin/helm3 && \
     rm -rf linux-amd64 && \
     # Init version 2 helm:
-    helm3 init --client-only && \
+    #helm3 init --client-only && \
     # install helm s3 plugin
     helm3 plugin install https://github.com/hypnoglow/helm-s3.git
 
