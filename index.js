@@ -253,6 +253,7 @@ async function run() {
       });
     }
 
+    core.debug(...process.env);
     // Actually execute the deployment here.
     if (task === "remove") {
       await exec.exec(helm, deleteCmd(helm, namespace, release), {
