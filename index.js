@@ -253,6 +253,24 @@ async function run() {
       });
     }
 
+    const options = {};
+    options.listeners = {
+      stdout: (data) => {
+        output += data.toString();
+      },
+      stderr: (data) => {
+        error += data.toString();
+      },
+      stdline: (data) => {
+        outputStdline += data;
+      },
+    };
+    let command = "helm3 plugin list "
+    core.debug(command)
+    await exec.exec(command, "", options)
+    core.debug("output =%s",output)
+    core.debug("stdline =%s", outputStdline)
+
     await exec.exec(helm, ["repo", "add", "staging", "http://nebula-helm-charts/charts/staging" ] , {
       env: {
         ...process.env,
