@@ -24,7 +24,7 @@ RUN \
     # Init version 2 helm:
     helm init --client-only && \
     # install helm s3 plugin
-    helm3 plugin install https://github.com/hypnoglow/helm-s3.git
+    #helm3 plugin install https://github.com/hypnoglow/helm-s3.git
 
 
 ENV PYTHONPATH "/usr/lib/python3.8/site-packages/"
