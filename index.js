@@ -260,8 +260,8 @@ async function run() {
           AWS_DEFAULT_REGION: "us-east-1"
         },
       });
-      core.debug(process.env.AWS_ACCESS_KEY_ID);
-    core.debug(...process.env);
+    core.debug(process.env.AWS_ACCESS_KEY_ID);
+
     // Actually execute the deployment here.
     if (task === "remove") {
       await exec.exec(helm, deleteCmd(helm, namespace, release), {
