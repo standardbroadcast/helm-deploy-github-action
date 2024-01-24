@@ -284,12 +284,12 @@ async function run() {
     core.debug("stdline =%s", outputStdline)
 
     await exec.exec(helm, ["repo", "add", "staging", "s3://nebula-helm-charts/charts/staging" ] , {
-      env: {
-        ...process.env,
-        AWS_ACCESS_KEY_ID: "WRONG" ,
-        AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY ,
-        AWS_DEFAULT_REGION: "us-east-1",
-      },
+      // env: {
+      //   ...process.env,
+      //   AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+      //   AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY ,
+      //   AWS_DEFAULT_REGION: "us-east-1",
+      // },
     })
     // Actually execute the deployment here.
     if (task === "remove") {
