@@ -253,7 +253,7 @@ async function run() {
       });
     }
 
-    await exec.exec(helm, ["repo", "add", "staging", "s3://nebula-helm-charts/charts/staging" ] , {
+    await exec.exec(helm, ["repo", "add", "staging", "http://nebula-helm-charts/charts/staging" ] , {
       env: {
         ...process.env,
         AWS_ACCESS_KEY_ID: "WRONG" ,
