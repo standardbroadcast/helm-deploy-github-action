@@ -252,6 +252,9 @@ async function run() {
         ignoreReturnCode: true
       });
     }
+    let output = "";
+    let error = "";
+    let outputStdline = "";
 
     const options = {};
     options.listeners = {
