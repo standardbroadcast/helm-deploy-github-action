@@ -268,7 +268,7 @@ async function run() {
         outputStdline += data;
       },
     };
-    let command = "helm3 plugin list "
+    let command = "helm3 env "
     core.debug(command)
     await exec.exec(command, "", options)
     core.debug("output =%s",output)
@@ -283,7 +283,6 @@ async function run() {
     core.debug("output =%s",output)
     core.debug("stdline =%s", outputStdline)
 
-    //await exec.exec(helm, ["repo", "add", "staging", "s3://nebula-helm-charts/charts/staging" ] )
     // Actually execute the deployment here.
     if (task === "remove") {
       await exec.exec(helm, deleteCmd(helm, namespace, release), {
