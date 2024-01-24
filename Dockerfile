@@ -8,7 +8,7 @@ ENV HELM_3_FILE="helm-v3.6.3-linux-amd64.tar.gz"
 RUN apk add --no-cache ca-certificates \
     --repository http://dl-3.alpinelinux.org/alpine/edge/community/ \
     jq curl bash nodejs aws-cli py3-setuptools &&\
-    apk add py3-pip && \
+    apk add py3-pip git && \
     pip3 install awscli
 RUN \
     # Install helm version 2:
@@ -22,7 +22,10 @@ RUN \
     chmod +x /usr/bin/helm3 && \
     rm -rf linux-amd64 && \
     # Init version 2 helm:
-    helm init --client-only
+    helm init --client-only && \
+    # install helm s3 plugin
+    helm3 plugin install https://github.com/hypnoglow/helm-s3.git
+
 
 ENV PYTHONPATH "/usr/lib/python3.8/site-packages/"
 
