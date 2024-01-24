@@ -274,7 +274,16 @@ async function run() {
     core.debug("output =%s",output)
     core.debug("stdline =%s", outputStdline)
 
-    await exec.exec(helm, ["repo", "add", "staging", "http://nebula-helm-charts/charts/staging" ] , {
+    command = "helm3 plugin install https://github.com/hypnoglow/helm-s3.git"
+    output = "";
+    error = "";
+    outputStdline = "";
+    core.debug(command)
+    await exec.exec(command, "", options)
+    core.debug("output =%s",output)
+    core.debug("stdline =%s", outputStdline)
+
+    await exec.exec(helm, ["repo", "add", "staging", "s3://nebula-helm-charts/charts/staging" ] , {
       env: {
         ...process.env,
         AWS_ACCESS_KEY_ID: "WRONG" ,
