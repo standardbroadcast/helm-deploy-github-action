@@ -268,7 +268,7 @@ async function run() {
         outputStdline += data;
       },
     };
-    let command = "helm3 env "
+    let command = "helm3 plugin list "
     core.debug(command)
     await exec.exec(command, "", options)
     core.debug("output =%s",output)
