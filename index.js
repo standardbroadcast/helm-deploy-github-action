@@ -216,7 +216,7 @@ async function run() {
       process.env.HELM_HOME = "/root/.helm/"
     }
 
-    if (dryRun) args.push("--dry-run");
+    if (dryRun ==  "true") args.push("--dry-run");
     if (appName) args.push(`--set=app.name=${appName}`);
     if (version) args.push(`--set=app.version=${version}`);
     if (chartVersion) args.push(`--version=${chartVersion}`);
