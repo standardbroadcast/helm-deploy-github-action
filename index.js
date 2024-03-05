@@ -259,38 +259,33 @@ async function run() {
         ignoreReturnCode: true
       });
     }
-    let output = "";
-    let error = "";
-    let outputStdline = "";
 
+    // Actually execute the deployment here.
+
+    let output = "";
     const options = {};
     options.listeners = {
       stdout: (data) => {
         output += data.toString();
       },
-      stderr: (data) => {
-        error += data.toString();
-      },
-      stdline: (data) => {
-        outputStdline += data;
-      },
     };
-    let command = "helm3 plugin list "
-    core.debug(command)
-    await exec.exec(command, "", options)
-    core.debug("output =%s",output)
-    core.debug("stdline =%s", outputStdline)
-
-    // Actually execute the deployment here.
-    if (task === "remove") {
-      await exec.exec(helm, deleteCmd(helm, namespace, release), {
-        ignoreReturnCode: true
-      });
-    } else {
-      await exec.exec(helm, args);
+    await exec.exec(helm, args, options);
+    await writeFile( 'dry-run.yml' , output);
+    let output2 = "";
+    const options2 = {};
+    options2.listeners = {
+      stdout: (data) => {
+        output2 += data.toString();
+      }
+    };
+    await exec.exec(helm, ["get", "manifest", release, "-n",  namespace ], options2);
+    await writeFile( 'manifest.yml' , output2) ;
+    try {
+      await exec.exec("diff", ["dry-run.yml", "manifest.yml"]);
     }
-
-    await status(task === "remove" ? "inactive" : "success");
+    catch (error) {
+      // do nothing
+    }
   } catch (error) {
     core.error(error);
     core.setFailed(error.message);
