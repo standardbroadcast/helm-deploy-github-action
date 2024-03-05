@@ -33,6 +33,7 @@ inputs:
   helm:
     description: Helm binary to execute, one of [helm, helm3].
     required: false
+    default: helm3
   token:
     description: Github repository token. If included and the event is a deployment
       the deployment_status event will be fired.
