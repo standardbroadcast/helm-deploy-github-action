@@ -205,11 +205,18 @@ async function run() {
       process.env.XDG_DATA_HOME = "/root/.helm/"
       process.env.XDG_CACHE_HOME = "/root/.helm/"
       process.env.XDG_CONFIG_HOME = "/root/.helm/"
+      process.env.HELM_CACHE_HOME="/root/.cache/helm"
+      process.env.HELM_CONFIG_HOME="/root/.config/helm"
+      process.env.HELM_DATA_HOME="/root/.local/share/helm"
+      process.env.HELM_PLUGINS="/root/.local/share/helm/plugins"
+      process.env.HELM_REGISTRY_CONFIG="/root/.config/helm/registry.json"
+      process.env.HELM_REPOSITORY_CACHE="/root/.cache/helm/repository"
+      process.env.HELM_REPOSITORY_CONFIG="/root/.config/helm/repositories.yaml"
     } else {
       process.env.HELM_HOME = "/root/.helm/"
     }
 
-    if (dryRun) args.push("--dry-run");
+    if (dryRun ==  "true") args.push("--dry-run");
     if (appName) args.push(`--set=app.name=${appName}`);
     if (version) args.push(`--set=app.version=${version}`);
     if (chartVersion) args.push(`--version=${chartVersion}`);
@@ -252,6 +259,27 @@ async function run() {
         ignoreReturnCode: true
       });
     }
+    let output = "";
+    let error = "";
+    let outputStdline = "";
+
+    const options = {};
+    options.listeners = {
+      stdout: (data) => {
+        output += data.toString();
+      },
+      stderr: (data) => {
+        error += data.toString();
+      },
+      stdline: (data) => {
+        outputStdline += data;
+      },
+    };
+    let command = "helm3 plugin list "
+    core.debug(command)
+    await exec.exec(command, "", options)
+    core.debug("output =%s",output)
+    core.debug("stdline =%s", outputStdline)
 
     // Actually execute the deployment here.
     if (task === "remove") {
