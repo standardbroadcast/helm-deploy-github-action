@@ -10,15 +10,21 @@ inputs:
   namespace:
     description: Kubernetes namespace name. (required)
     required: true
+  repository:
+    description: |
+      The repository URL of the helm chart.
+    required: false
   chart:
-    description: Helm chart path. If set to "app" this will use the built in helm
+    description: |
+      Helm chart path. If set to "app" this will use the built in helm
       chart found in this repository. (required)
     required: true
   values:
     description: Helm chart values, expected to be a YAML or JSON string.
     required: false
   task:
-    description: Task name. If the task is "remove" it will remove the configured
+    description: |
+      Task name. If the task is "remove" it will remove the configured
       helm release.
     required: false
   dry-run:
@@ -34,15 +40,18 @@ inputs:
     description: Helm binary to execute, one of [helm, helm3].
     required: false
   token:
-    description: Github repository token. If included and the event is a deployment
+    description: |
+      Github repository token. If included and the event is a deployment
       the deployment_status event will be fired.
     required: false
   value-files:
-    description: Additional value files to apply to the helm chart. Expects JSON encoded
+    description: |
+      Additional value files to apply to the helm chart. Expects JSON encoded
       array or a string.
     required: false
   secrets:
-    description: Secret variables to include in value file interpolation. Expects
+    description: |
+      Secret variables to include in value file interpolation. Expects
       JSON encoded map.
     required: false
   version:
