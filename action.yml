@@ -10,15 +10,15 @@ inputs:
   namespace:
     description: Kubernetes namespace name. (required)
     required: true
-  repository:
-    description: |
-      The repository URL of the helm chart.
-    required: false
   chart:
     description: |
       Helm chart path. If set to "app" this will use the built in helm
       chart found in this repository. (required)
     required: true
+  repository:
+    description: |
+      The repository URL of the helm chart.
+    required: false
   values:
     description: Helm chart values, expected to be a YAML or JSON string.
     required: false
